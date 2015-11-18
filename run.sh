@@ -2,8 +2,7 @@
 
 docker run \
   --name bitcoind \
-  --tty \
-  --interactive \
+  --detach \
   --rm \
   -h bitcoind \
   --memory=1g \

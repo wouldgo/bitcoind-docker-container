@@ -10,10 +10,9 @@ RUN git fetch --tags && \
   latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
   git checkout $latestTag
 
-RUN mkdir /bdb && \
+RUN mkdir /blockchain && \
   ./autogen.sh && \
   ./configure \
-    --prefix=/bdb
     --enable-cxx \
     --disable-shared \
     --with-pic \
@@ -24,4 +23,8 @@ RUN mkdir /bdb && \
   make -j 2 && \
   make install
 
+ADD ./conf/bitcoin.conf /opt/bitcoin.conf
+VOLUME ["/blockchain"]
 WORKDIR bin
+
+ENTRYPOINT ["./bitcoind", "-conf=/opt/bitcoin.conf"]
