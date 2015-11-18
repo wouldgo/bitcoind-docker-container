@@ -24,7 +24,7 @@ RUN mkdir /blockchain && \
   make install
 
 ADD ./conf/bitcoin.conf /opt/bitcoin.conf
+ADD ./run /boot
 VOLUME ["/blockchain"]
-WORKDIR bin
 
-ENTRYPOINT ["./bitcoind", "-conf=/opt/bitcoin.conf"]
+CMD ["/bin/bash", "/boot/run.sh" ]
