@@ -19,6 +19,8 @@ RUN mkdir /blockchain && \
     --prefix=/bitcoin \
     --enable-upnp-default \
     --enable-hardening \
+    --with-cli=no \
+    --with-gui=no \
     --disable-wallet && \
   make -j 2 && \
   make install
