@@ -6,9 +6,6 @@ RUN apt-get install -y build-essential libtool autotools-dev autoconf pkg-config
 
 RUN git clone https://github.com/bitcoin/bitcoin.git
 WORKDIR bitcoin
-RUN git fetch --tags && \
-  latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
-  git checkout $latestTag
 
 RUN mkdir /blockchain && \
   ./autogen.sh && \
@@ -28,5 +25,6 @@ RUN mkdir /blockchain && \
 ADD ./conf/bitcoin.conf /opt/bitcoin.conf
 ADD ./run /boot
 VOLUME ["/blockchain"]
+EXPOSE 8332 8333 28332 28333 28334 28335
 
 CMD ["/bin/bash", "/boot/run.sh" ]
